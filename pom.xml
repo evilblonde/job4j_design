@@ -13,11 +13,6 @@
         <module>chapter_005</module>
     </modules>
 
-    <dependencies>
-
-
-    </dependencies>
-
     <build>
         <plugins>
             <plugin>
