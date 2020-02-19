@@ -23,15 +23,14 @@ public class StringTempletizer implements Template {
 
         StringBuilder builder = new StringBuilder(template);
 
-        params.forEach((key, value) -> {
-            Pattern keyPattern = Pattern.compile("\\$\\{" + key + "}");
-            Matcher keyMatcher = keyPattern.matcher(builder);
-            int startIndex = 0;
-            while (keyMatcher.find(startIndex)) {
-                builder.replace(keyMatcher.start(), keyMatcher.end(), value);
-                startIndex = keyMatcher.start() + value.length();
-            }
-        });
+        int startIndex = 0;
+
+        while (matcher.find(startIndex)) {
+            String param = builder.substring(matcher.start() + 2, matcher.end() - 1);
+            String replacement = params.get(param);
+            builder.replace(matcher.start(), matcher.end(), replacement);
+            startIndex = matcher.start() + replacement.length();
+        }
 
         return builder.toString();
     }
