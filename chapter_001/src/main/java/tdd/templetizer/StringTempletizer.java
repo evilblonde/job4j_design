@@ -14,17 +14,16 @@ public class StringTempletizer implements Template {
     public String generate(String template, Map<String, String> params) throws ValidationException {
         validateTemplate(template);
 
-        Matcher matcher = KEYS.matcher(template);
+        StringBuilder builder = new StringBuilder(template);
+        Matcher matcher = KEYS.matcher(builder);
+
         Set<String> keys = matcher.results()
                 .map(m -> template.substring(m.start() + 2, m.end() - 1))
                 .collect(Collectors.toSet());
 
         validateParams(params, keys);
 
-        StringBuilder builder = new StringBuilder(template);
-
         int startIndex = 0;
-
         while (matcher.find(startIndex)) {
             String param = builder.substring(matcher.start() + 2, matcher.end() - 1);
             String replacement = params.get(param);
