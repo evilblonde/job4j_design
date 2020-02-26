@@ -4,6 +4,8 @@ import java.util.Optional;
 
 public interface Parser {
 
-    Optional<Double> parseInput(String input);
+    Optional<Double> parseNumberFromInput(String input);
+
+    double parseNumberFromScanner();
 
 }

@@ -34,7 +34,7 @@ public class ParserTest {
     @Test
     public void whenNumberInInputParseSuccessfully() {
         Parser parser = new ParserImpl();
-        Optional<Double> result = parser.parseInput("123");
+        Optional<Double> result = parser.parseNumberFromInput("123");
         assertTrue(result.isPresent());
         assertEquals(123d, result.get(), 1E-6);
     }
@@ -42,7 +42,7 @@ public class ParserTest {
     @Test
     public void whenBadInputThenAskToRetry() {
         Parser parser = new ParserImpl();
-        Optional<Double> result = parser.parseInput("asd");
+        Optional<Double> result = parser.parseNumberFromInput("asd");
         assertFalse(result.isPresent());
         assertEquals("Unable to parse input, try again", getOutput().trim());
     }

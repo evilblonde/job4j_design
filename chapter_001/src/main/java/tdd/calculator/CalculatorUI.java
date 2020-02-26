@@ -26,7 +26,7 @@ public class CalculatorUI {
             if ("exit".equals(input)) {
                 break;
             }
-            Optional<Double> result = parser.parseInput(input);
+            Optional<Double> result = parser.parseNumberFromInput(input);
             if (result.isPresent()) {
                 calculator.setInitialValue(result.get());
                 openCalculatorMenu();
@@ -42,16 +42,16 @@ public class CalculatorUI {
             String input = scanner.nextLine();
             switch (input) {
                 case "+":
-                    calculator.add(parseNumber());
+                    calculator.add(parser.parseNumberFromScanner());
                     break;
                 case "-":
-                    calculator.subtract(parseNumber());
+                    calculator.subtract(parser.parseNumberFromScanner());
                     break;
                 case "*":
-                    calculator.multiply(parseNumber());
+                    calculator.multiply(parser.parseNumberFromScanner());
                     break;
                 case "/":
-                    calculator.divide(parseNumber());
+                    calculator.divide(parser.parseNumberFromScanner());
                     break;
                 case "stop":
                     operating = false;
@@ -61,16 +61,4 @@ public class CalculatorUI {
             }
         }
     }
-
-    private double parseNumber() {
-        System.out.println("Enter number");
-        while (true) {
-            Scanner scanner = new Scanner(System.in);
-            Optional<Double> doubleOptional = parser.parseInput(scanner.nextLine());
-            if (doubleOptional.isPresent()) {
-                return doubleOptional.get();
-            }
-        }
-    }
-
 }
