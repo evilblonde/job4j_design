@@ -3,6 +3,9 @@ package tdd.calculator;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import tdd.bettercalc.ListParser;
+import tdd.bettercalc.Parser;
+import tdd.bettercalc.ScannerParser;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -33,7 +36,7 @@ public class ParserTest {
 
     @Test
     public void whenNumberInInputParseSuccessfully() {
-        Parser parser = new ParserImpl();
+        Parser parser = new ScannerParser();
         Optional<Double> result = parser.parseNumberFromInput("123");
         assertTrue(result.isPresent());
         assertEquals(123d, result.get(), 1E-6);
@@ -41,9 +44,18 @@ public class ParserTest {
 
     @Test
     public void whenBadInputThenAskToRetry() {
-        Parser parser = new ParserImpl();
+        Parser parser = new ScannerParser();
         Optional<Double> result = parser.parseNumberFromInput("asd");
         assertFalse(result.isPresent());
         assertEquals("Unable to parse input, try again", getOutput().trim());
+    }
+
+    @Test
+    public void parseSeveralNumbersFromInputArray() {
+        ListParser parser = new ListParser();
+        parser.setSource(new String[]{"123", "333", "4ooo", "4321"});
+        assertEquals(123, parser.parseNumberFromSource(), 1e-6);
+        assertEquals(333, parser.parseNumberFromSource(), 1e-6);
+        assertEquals(4321, parser.parseNumberFromSource(), 1e-6);
     }
 }

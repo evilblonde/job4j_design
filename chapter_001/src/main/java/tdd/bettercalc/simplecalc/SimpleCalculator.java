@@ -2,30 +2,33 @@ package tdd.bettercalc.simplecalc;
 
 import tdd.bettercalc.Calculator;
 import tdd.bettercalc.Operation;
-import tdd.calculator.Parser;
-import tdd.calculator.ParserImpl;
+import tdd.bettercalc.Parser;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public class SimpleCalculator implements Calculator {
 
     private final StringBuilder expression = new StringBuilder();
-    private final Parser parser = new ParserImpl();
+    private final Parser parser;
     private Map<String, Operation> operations = new HashMap<>();
     private Double result;
     private boolean running;
+    private final Consumer<String> outputConsumer;
 
-    public SimpleCalculator() {
-        running = true;
+    public SimpleCalculator(Parser parser, Consumer<String> outputConsumer) {
+        this.parser = parser;
+        this.outputConsumer = outputConsumer;
         addOperation(new Operation("r", "enter value to operate with", this::setValue, true));
         addOperation(new Operation("e", "exit", this::exit, true));
         addOperation(new Operation("+", "add", this::add));
         addOperation(new Operation("-", "subtract", this::subtract));
         addOperation(new Operation("*", "multiply", this::multiply));
         addOperation(new Operation("/", "divide", this::divide));
+        running = true;
     }
 
     private void exit() {
@@ -45,7 +48,7 @@ public class SimpleCalculator implements Calculator {
     }
 
     private void setValue() {
-        result = parser.parseNumberFromScanner();
+        result = parser.parseNumberFromSource();
     }
 
     public void addOperation(Operation operation) {
@@ -62,7 +65,7 @@ public class SimpleCalculator implements Calculator {
         if (operation != null && isPossibleToPerform(operation)) {
             operation.run();
         } else {
-            System.out.println("invalid command, try again");
+            outputConsumer.accept("invalid command, try again");
         }
     }
 
@@ -75,28 +78,28 @@ public class SimpleCalculator implements Calculator {
     }
 
     private void add() {
-        double value = parser.parseNumberFromScanner();
+        double value = parser.parseNumberFromSource();
         prepareExpression(value, " + ");
         result += value;
         printAndClearExpression();
     }
 
     private void subtract() {
-        double value = parser.parseNumberFromScanner();
+        double value = parser.parseNumberFromSource();
         prepareExpression(value, " - ");
         result -= value;
         printAndClearExpression();
     }
 
     private void multiply() {
-        double value = parser.parseNumberFromScanner();
+        double value = parser.parseNumberFromSource();
         prepareExpression(value, " * ");
         result *= value;
         printAndClearExpression();
     }
 
     private void divide() {
-        double value = parser.parseNumberFromScanner();
+        double value = parser.parseNumberFromSource();
         prepareExpression(value, " / ");
         result /= value;
         printAndClearExpression();
@@ -108,7 +111,7 @@ public class SimpleCalculator implements Calculator {
 
     public void printAndClearExpression() {
         expression.append(result);
-        System.out.println(expression.toString());
+        outputConsumer.accept(expression.toString());
         expression.delete(0, expression.length());
     }
 

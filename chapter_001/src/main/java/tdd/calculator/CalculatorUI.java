@@ -1,5 +1,8 @@
 package tdd.calculator;
 
+import tdd.bettercalc.Parser;
+import tdd.bettercalc.ScannerParser;
+
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -14,7 +17,7 @@ public class CalculatorUI {
     }
 
     public static void main(String[] args) {
-        CalculatorUI ui = new CalculatorUI(new CalculatorImpl(), new ParserImpl());
+        CalculatorUI ui = new CalculatorUI(new CalculatorImpl(), new ScannerParser());
         ui.openStartMenu();
     }
 
@@ -42,16 +45,16 @@ public class CalculatorUI {
             String input = scanner.nextLine();
             switch (input) {
                 case "+":
-                    calculator.add(parser.parseNumberFromScanner());
+                    calculator.add(parser.parseNumberFromSource());
                     break;
                 case "-":
-                    calculator.subtract(parser.parseNumberFromScanner());
+                    calculator.subtract(parser.parseNumberFromSource());
                     break;
                 case "*":
-                    calculator.multiply(parser.parseNumberFromScanner());
+                    calculator.multiply(parser.parseNumberFromSource());
                     break;
                 case "/":
-                    calculator.divide(parser.parseNumberFromScanner());
+                    calculator.divide(parser.parseNumberFromSource());
                     break;
                 case "stop":
                     operating = false;

@@ -1,9 +1,9 @@
-package tdd.calculator;
+package tdd.bettercalc;
 
 import java.util.Optional;
 import java.util.Scanner;
 
-public class ParserImpl implements Parser {
+public class ScannerParser implements Parser {
 
     @Override
     public Optional<Double> parseNumberFromInput(String input) {
@@ -17,7 +17,7 @@ public class ParserImpl implements Parser {
     }
 
     @Override
-    public double parseNumberFromScanner() {
+    public double parseNumberFromSource() {
         System.out.println("Enter number");
         while (true) {
             Scanner scanner = new Scanner(System.in);

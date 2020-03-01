@@ -3,14 +3,17 @@ package tdd.bettercalc.engicalc;
 import tdd.bettercalc.Calculator;
 import tdd.bettercalc.Operation;
 import tdd.bettercalc.simplecalc.SimpleCalculator;
+import tdd.bettercalc.Parser;
 
 import java.util.Collection;
+import java.util.function.Consumer;
 
 public class EngineeringCalculator implements Calculator {
 
-    SimpleCalculator simpleCalculator = new SimpleCalculator();
+    private final SimpleCalculator simpleCalculator;
 
-    public EngineeringCalculator() {
+    public EngineeringCalculator(Parser parser, Consumer<String> outputConsumer) {
+        this.simpleCalculator = new SimpleCalculator(parser, outputConsumer);
         simpleCalculator.addOperation(new Operation("s", "sin", this::sin));
         simpleCalculator.addOperation(new Operation("c", "cos", this::cos));
         simpleCalculator.addOperation(new Operation("t", "tan", this::tan));

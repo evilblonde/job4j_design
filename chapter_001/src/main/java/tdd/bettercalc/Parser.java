@@ -1,4 +1,4 @@
-package tdd.calculator;
+package tdd.bettercalc;
 
 import java.util.Optional;
 
@@ -6,6 +6,6 @@ public interface Parser {
 
     Optional<Double> parseNumberFromInput(String input);
 
-    double parseNumberFromScanner();
+    double parseNumberFromSource();
 
 }
