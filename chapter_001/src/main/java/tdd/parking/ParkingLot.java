@@ -2,8 +2,12 @@ package tdd.parking;
 
 public interface ParkingLot {
 
-    boolean park(Vehicle vehicle);
+    boolean hasPlaceFor(Vehicle vehicle);
 
-    Vehicle leave(Vehicle vehicle);
+    Ticket park(Vehicle vehicle);
+
+    Vehicle takeBack(Ticket ticket);
+
+    String getSpotInfo();
 
 }
