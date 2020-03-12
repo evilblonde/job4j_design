@@ -6,10 +6,8 @@ public interface ParkingSpot {
 
     void setOccupiedWith(Vehicle vehicle);
 
-    void remove(Vehicle vehicle);
+    Vehicle remove();
 
     boolean isOccupied();
-
-    ParkingSpot getNeighbor();
 
 }

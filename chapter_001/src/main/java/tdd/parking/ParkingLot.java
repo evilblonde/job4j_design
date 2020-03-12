@@ -4,9 +4,9 @@ public interface ParkingLot {
 
     boolean hasPlaceFor(Vehicle vehicle);
 
-    Ticket park(Vehicle vehicle);
+    Ticket park(Vehicle vehicle) throws Exception;
 
-    Vehicle takeBack(Ticket ticket);
+    Vehicle takeBack(Ticket ticket) throws Exception;
 
     String getSpotInfo();
 
