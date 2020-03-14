@@ -9,6 +9,15 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
+    <dependencies>
+        <dependency>
+            <groupId>net.jcip</groupId>
+            <artifactId>jcip-annotations</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+    </dependencies>
+
     <artifactId>chapter_007</artifactId>
     <build>
         <plugins>
