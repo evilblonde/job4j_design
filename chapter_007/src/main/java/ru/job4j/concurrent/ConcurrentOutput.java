@@ -18,7 +18,7 @@ public class ConcurrentOutput {
         printThreadName();
     }
 
-    private static void printThreadName() {
+    static void printThreadName() {
         System.out.println(Thread.currentThread().getName());
     }
 
