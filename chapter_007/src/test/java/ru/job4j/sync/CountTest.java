@@ -22,7 +22,7 @@ public class CountTest {
         assertEquals(2, count.get());
     }
 
-    private class ThreadCount extends Thread {
+    private static class ThreadCount extends Thread {
         private final Count count;
 
         private ThreadCount(final Count count) {
