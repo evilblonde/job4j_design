@@ -2,7 +2,7 @@ package ru.job4j.concurrent;
 
 public class ConsoleProgress implements Runnable {
 
-    char[] symbols = {'-', '/', '|', '\\'};
+    private final char[] symbols = {'-', '/', '|', '\\'};
 
     public static void main(String[] args) {
         try {
@@ -24,7 +24,7 @@ public class ConsoleProgress implements Runnable {
                 Thread.sleep(500);
             }
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Thread.currentThread().interrupt();
         }
     }
 
